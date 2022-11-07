@@ -1,0 +1,3 @@
+export const GET_PROJECTS = 'GET_PROJECTS';
+export const CREATE_PROJECT = 'CREATE_PROJECT';
+export const FETCH_PRODUCTS = 'FETCH_PRODUCTS';

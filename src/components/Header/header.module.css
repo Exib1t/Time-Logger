@@ -1,0 +1,53 @@
+.header__wrapper {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.header {
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+  max-width: 680px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 3px solid var(--purple);
+  border-top: none;
+  border-radius: 0 0 16px 16px;
+  list-style: none;
+  overflow: hidden;
+}
+
+.header__item {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+}
+
+.header__link {
+  margin: 0;
+  padding: 9px 0;
+  font: normal 500 16px/1 "Ubuntu";
+  color: var(--white);
+  text-align: center;
+  text-decoration: none;
+  width: 100%;
+  border-right: 3px solid var(--purple);
+  transition: .2s;
+}
+
+/*.header__link:hover {*/
+/*  background: var(--purple);*/
+/*  color: var(--white) !important;*/
+/*}*/
+
+.header__link:hover {
+  color: var(--purple);
+}
+
+.noBorder {
+  border: none;
+}

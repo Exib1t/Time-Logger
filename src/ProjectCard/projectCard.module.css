@@ -1,0 +1,97 @@
+.projectCard {
+  position: relative;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 25px 20px 55px;
+  width: 100%;
+  max-width: 380px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  text-decoration: none;
+}
+
+.projectCard::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0);
+  transition: .2s;
+}
+
+.projectCard:hover::before {
+  background: rgba(0, 0, 0, 0.5);
+  transition: .2s;
+}
+
+.projectCard:hover .projectCard__btn {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.projectCard:hover .projectCard__dltBtn {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.projectCard__title {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font: normal 500 32px/1 "Ubuntu";
+  color: var(--white);
+  text-align: center;
+}
+
+.projectCard__text {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font: normal 400 26px/1 "Ubuntu";
+  color: var(--white);
+}
+
+.projectCard__btn {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  margin: 0;
+  padding: 8px 47px;
+  width: max-content;
+  font: normal 700 24px/1 "Ubuntu";
+  color: var(--white);
+  text-align: center;
+  background: var(--green);
+  border-radius: 10px;
+  text-decoration: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: .2s;
+  z-index: 2;
+}
+
+.projectCard__dltBtn {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  margin: 0;
+  padding: 0;
+  width: 35px;
+  height: 35px;
+  outline: none;
+  background: no-repeat center / 15px url(../assets/img/bin.svg);
+  border: 2px solid var(--red);
+  border-radius: 50%;
+  text-decoration: none;
+  opacity: 0;
+  pointer-events: none;
+  cursor: pointer;
+  transition: .2s;
+  z-index: 2;
+}

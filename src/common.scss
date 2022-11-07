@@ -1,0 +1,33 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+:root {
+  --white: #FFFFFF;
+  --light-blue: #AAB5DC;
+  --dark-blue: #24252F;
+  --dark: #141414;
+  --black: #000000;
+  --purple: #BD00FF;
+  --red: #FF0000;
+  --green: #00CA39;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  background: var(--dark);
+  color: var(--white);
+}
+
+//.active {
+//  color: var(--purple) !important;
+//}
+
+.active {
+  background: var(--purple) !important;
+  color: var(--white) !important;
+}

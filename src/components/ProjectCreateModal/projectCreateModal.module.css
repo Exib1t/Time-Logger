@@ -1,0 +1,149 @@
+.hidden {
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.70);
+  opacity: 0;
+  pointer-events: none;
+  transition: .2s;
+}
+
+.modal__wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.70);
+  opacity: 1;
+  pointer-events: auto;
+  transition: .2s;
+}
+
+.modal {
+  position: relative;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 40px;
+  width: 100%;
+  max-width: 640px;
+  background: var(--dark-blue);
+  border-radius: 10px;
+}
+
+.modal__closeBtn {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  background: none;
+  width: 15px;
+  height: 15px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.modal__closeBtn::before, .modal__closeBtn::after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 15px;
+  height: 2px;
+  background: var(--white);
+}
+
+.modal__closeBtn::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.modal__closeBtn::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.modal__title {
+  margin: 0 0 36px;
+  padding: 0;
+  font: 700 28px/1 'Ubuntu';
+  color: var(--white);
+  text-align: center;
+}
+
+.modal__form {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.modal__label {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font: 400 18px/1 'Ubuntu';
+}
+
+.modal__input {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 13px 15px 14px;
+  background: rgba(0, 0, 0, 0.3);
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  font: 400 18px/1 'Ubuntu';
+  color: var(--white);
+}
+
+.modal__input::placeholder {
+  font: 400 18px/1 'Ubuntu';
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.modal__colorInput::-webkit-color-swatch-wrapper {
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.modal__colorInput::-webkit-color-swatch {
+  border: none;
+}
+
+.modal__button {
+  box-sizing: border-box;
+  margin: 20px 0 0 ;
+  padding: 7px;
+  width: 100%;
+  background: var(--purple);
+  border: 2px solid rgba(0, 0, 0, 0);
+  border-radius: 5px;
+  font: 700 20px/1 "Ubuntu";
+  color: var(--white);
+  text-align: center;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.modal__button:hover {
+  background: none;
+  border-color: var(--purple);
+  color: var(--purple);
+}
