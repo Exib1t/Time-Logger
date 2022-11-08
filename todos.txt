@@ -1,0 +1,2 @@
+ToDo: add spinner when data is fetching
+ToDo: add animation of project mounting

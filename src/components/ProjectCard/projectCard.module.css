@@ -85,7 +85,7 @@
   width: 35px;
   height: 35px;
   outline: none;
-  background: no-repeat center / 15px url(../assets/img/bin.svg);
+  background: no-repeat center / 15px url(../../assets/img/bin.svg);
   border: 2px solid var(--red);
   border-radius: 50%;
   text-decoration: none;

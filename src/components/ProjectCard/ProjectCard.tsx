@@ -1,12 +1,23 @@
 import React from 'react';
 import styles from './projectCard.module.css';
 import { Link } from 'react-router-dom';
+import { deleteProject, fetchProjects } from '../../storeApi/storeApi';
+import { useDispatch } from 'react-redux';
 
 // @ts-ignore
 const ProjectCard = ({ project }) => {
+  const dispatch = useDispatch();
+
   const style = {
     backgroundColor: project.color,
   };
+
+  function onDeleteHandle() {
+    // @ts-ignore
+    dispatch(deleteProject(project.id));
+    // @ts-ignore
+    dispatch(fetchProjects());
+  }
 
   return (
     <div className={styles.projectCard} style={style}>
@@ -24,7 +35,7 @@ const ProjectCard = ({ project }) => {
       <Link to={project.name} className={styles.projectCard__btn}>
         Open
       </Link>
-      <button className={styles.projectCard__dltBtn} />
+      <button className={styles.projectCard__dltBtn} onClick={onDeleteHandle} />
     </div>
   );
 };

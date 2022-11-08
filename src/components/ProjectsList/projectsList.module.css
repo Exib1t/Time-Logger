@@ -58,3 +58,12 @@
 .projectsList__addBtn::before {
   transform: translate(-50%, -50%) rotate(90deg);
 }
+
+.projectsList__text {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font: 400 24px/1 "Ubuntu";
+  color: var(--white);
+  text-align: center;
+}
