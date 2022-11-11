@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from './projectCreateModal.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProjects, postProject } from '../../storeApi/storeApi';
+import { getNewProjectId } from '../../functions/getNewProjectId';
 
 const ProjectCreateModal = ({ state, setState }: Modal) => {
   // @ts-ignore
@@ -21,9 +22,10 @@ const ProjectCreateModal = ({ state, setState }: Modal) => {
 
   function onSubmitHandle(e: any) {
     e.preventDefault();
+    console.log(projectsState);
     if (validateData()) {
       // @ts-ignore
-      dispatch(postProject(project, projectsState.length.toString()));
+      dispatch(postProject(project, getNewProjectId(projectsState)));
       // @ts-ignore
       dispatch(fetchProjects());
       closeHandle();

@@ -1,6 +1,7 @@
 import db from '../firebase.config';
 import { deleteDoc, doc } from 'firebase/firestore';
 import { FETCH_PROJECTS } from '../store/actionCreator';
+import { hexToHSL } from '../functions/hexToHsl';
 
 export const fetchProjects = () => {
   return async (dispatch: any) => {
@@ -18,6 +19,7 @@ export const fetchProjects = () => {
 export const postProject = (project: any, id: string) => {
   return async (dispatch: any) => {
     project.id = id;
+    project.color = hexToHSL(project.color);
     const response = db.collection('projects');
     const data = await response.doc(id).set(project);
   };
