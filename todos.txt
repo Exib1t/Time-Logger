@@ -1,3 +1,2 @@
-ToDo: change size of add project button to 36px
 ToDo: add spinner when data is fetching
 ToDo: add animation of project mounting
