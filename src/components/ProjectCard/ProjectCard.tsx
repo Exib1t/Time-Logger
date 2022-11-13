@@ -32,7 +32,7 @@ const ProjectCard = ({ project }) => {
         h:{project.remaining.minutes < 10 ? `0${project.remaining.minutes}` : `${project.remaining.minutes}`}
         m:{project.remaining.seconds < 10 ? `0${project.remaining.seconds}` : `${project.remaining.seconds}`}s
       </span>
-      <Link to={project.name} className={styles.projectCard__btn}>
+      <Link to={`${project.id}`} className={styles.projectCard__btn}>
         Open
       </Link>
       <button className={styles.projectCard__dltBtn} onClick={onDeleteHandle} />

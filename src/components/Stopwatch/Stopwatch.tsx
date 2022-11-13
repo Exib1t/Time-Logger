@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './stopwatch.module.css';
 import { startStopwatch, stopStopwatch } from '../../stopwatchAsync/stopwatchAsync';
 import { useDispatch, useSelector } from 'react-redux';
@@ -27,6 +27,13 @@ const Stopwatch = () => {
   function resetHandle() {
     dispatch({ type: RESET_STOPWATCH });
   }
+
+  useEffect(() => {
+    return () => {
+      // @ts-ignore
+      dispatch(stopStopwatch(inter));
+    };
+  }, []);
 
   return (
     <section className={styles.stopwatch}>
