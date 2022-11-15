@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProjects, postProject } from '../../../storeApi/storeApi';
 import Stopwatch from '../../Stopwatch/Stopwatch';
 import styles from './projectPage.module.css';
-import { SET_STOPWATCH } from '../../../store/actionCreator';
 
 const ProjectPage = () => {
   const { pathname } = useLocation();
@@ -13,7 +12,6 @@ const ProjectPage = () => {
   // @ts-ignore
   const projects = useSelector(state => state.projects);
   // @ts-ignore
-  const time = useSelector(state => state.stopwatch);
   const dispatch = useDispatch();
   const project = projects.find((project: { id: number }) => +project.id === projectId);
 
@@ -23,24 +21,19 @@ const ProjectPage = () => {
   }, []);
 
   useEffect(() => {
-    if (project) {
-      dispatch({ type: SET_STOPWATCH, payload: project.logged });
-    }
-  }, [project]);
-
-  useEffect(() => {
-    if (project) {
-      project.logged = time;
-      // @ts-ignore
-      dispatch(postProject(project, projectId.toString()));
-    }
-  }, [time]);
+    return () => {
+      if (project) {
+        // @ts-ignore
+        dispatch(postProject(project, projectId.toString()));
+      }
+    };
+  }, [projects]);
 
   return (
     <section className={styles.projectPage__wrapper}>
       <div className={styles.projectPage}>
         <h1 className={styles.projectPage__title}>{project?.name}</h1>
-        <Stopwatch />
+        <Stopwatch projectId={projectId} />
       </div>
     </section>
   );
