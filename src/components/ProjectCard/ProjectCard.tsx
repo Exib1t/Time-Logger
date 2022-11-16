@@ -3,13 +3,14 @@ import styles from './projectCard.module.css';
 import { Link } from 'react-router-dom';
 import { deleteProject, fetchProjects } from '../../storeApi/storeApi';
 import { useDispatch } from 'react-redux';
+import { hexToHSL } from '../../functions/hexToHsl';
 
 // @ts-ignore
 const ProjectCard = ({ project }) => {
   const dispatch = useDispatch();
 
   const style = {
-    backgroundColor: project.color,
+    backgroundColor: hexToHSL(project.color),
   };
 
   function onDeleteHandle() {

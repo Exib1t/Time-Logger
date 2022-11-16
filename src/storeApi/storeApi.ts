@@ -19,7 +19,6 @@ export const fetchProjects = () => {
 export const postProject = (project: any, id: string) => {
   return async (dispatch: any) => {
     project.id = id;
-    project.color = hexToHSL(project.color);
     const response = db.collection('projects');
     const data = await response.doc(id).set(project);
   };
