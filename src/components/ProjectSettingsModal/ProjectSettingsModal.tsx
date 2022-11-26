@@ -1,47 +1,61 @@
-import React, { useState } from 'react';
-import styles from './projectCreateModal.module.css';
+import React, { useEffect, useRef, useState } from 'react';
+import styles from './projectSettingsModal.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProjects, postProject } from '../../storeApi/storeApi';
-import { getNewProjectId } from '../../functions/getNewProjectId';
 
-const ProjectCreateModal = ({ state, setState }: Modal) => {
-  // @ts-ignore
-  const projectsState = useSelector(state => state.projects);
+const ProjectSettingsModal = ({ state, setState }: Modal) => {
   const dispatch = useDispatch();
-  const [project, setProject] = useState({
-    id: null,
+  // @ts-ignore
+  const settings = useSelector(state => state.settings);
+  // @ts-ignore
+  const project = useSelector(state => state.projects).find(project => project.id === settings.id);
+  const [editedProject, setEditedProject] = useState({
+    id: '',
     name: '',
-    color: '#000000',
-    logged: { seconds: 0, minutes: 0, hours: 0 },
-    remaining: { seconds: 0, minutes: 0, hours: 0 },
+    color: '',
+    logged: '',
+    remaining: '',
   });
-
-  function closeHandle() {
-    setState(false);
-  }
-
-  function onSubmitHandle(e: any) {
-    e.preventDefault();
-    if (validateData()) {
-      // @ts-ignore
-      dispatch(postProject(project, getNewProjectId(projectsState)));
-      // @ts-ignore
-      dispatch(fetchProjects());
-      closeHandle();
-      setProject({ ...project, name: '', color: '#000000' });
-    }
-  }
+  const nameInput = useRef();
 
   function setColor(e: any) {
-    setProject({ ...project, color: e.target.dataset.color });
+    setEditedProject({ ...editedProject, color: e.target.dataset.color });
+  }
+
+  function closeHandle() {
+    setState({ ...state, visibility: false });
   }
 
   function validateData() {
-    return project.name.trim();
+    return editedProject.name.trim();
+  }
+
+  useEffect(() => {
+    project && setEditedProject(project);
+  }, [project]);
+
+  function onSaveHandle(e: any) {
+    e.preventDefault();
+    if (validateData()) {
+      // @ts-ignore
+      dispatch(postProject(editedProject, settings.id));
+      // @ts-ignore
+      dispatch(fetchProjects());
+      closeHandle();
+    } else {
+      // @ts-ignore
+      nameInput.current.style.borderColor = 'red';
+      // @ts-ignore
+      nameInput.current.focus();
+      setTimeout(() => {
+        // @ts-ignore
+        nameInput.current.style.borderColor = 'transparent';
+      }, 500);
+    }
   }
 
   return (
-    <section className={state ? styles.modal__wrapper : styles.hidden} onDoubleClick={closeHandle}>
+    <section className={state.visibility ? styles.modal__wrapper : styles.hidden} onDoubleClick={closeHandle}>
       <div
         className={styles.modal}
         onDoubleClick={e => {
@@ -50,19 +64,21 @@ const ProjectCreateModal = ({ state, setState }: Modal) => {
       >
         <button className={styles.modal__closeBtn} onClick={closeHandle} />
 
-        <h3 className={styles.modal__title}>Create a new project</h3>
+        <h3 className={styles.modal__title}>Project settings</h3>
         <form action="" className={styles.modal__form}>
           <label htmlFor="" className={styles.modal__label}>
             Name:
             <input
+              // @ts-ignore
+              ref={nameInput}
               type="text"
               placeholder={'Project name'}
               className={styles.modal__input}
-              value={project.name}
-              onChange={e => {
-                setProject({ ...project, name: e.target.value });
-              }}
               required
+              value={editedProject.name}
+              onChange={e => {
+                setEditedProject({ ...editedProject, name: e.target.value });
+              }}
             />
           </label>
           <label htmlFor="" className={styles.modal__label}>
@@ -71,9 +87,9 @@ const ProjectCreateModal = ({ state, setState }: Modal) => {
               <input
                 type="color"
                 className={styles.modal__colorInput}
-                value={project.color}
+                value={editedProject.color}
                 onChange={e => {
-                  setProject({ ...project, color: e.target.value });
+                  setEditedProject({ ...editedProject, color: e.target.value });
                 }}
               />
               <button
@@ -89,8 +105,8 @@ const ProjectCreateModal = ({ state, setState }: Modal) => {
               <button type={'button'} className={styles.modal__colorButton} data-color={'#8100ff'} style={{ backgroundColor: '#8100ff' }} onClick={setColor} />
             </div>
           </label>
-          <button type={'submit'} className={styles.modal__button} onClick={onSubmitHandle}>
-            Create project
+          <button type={'submit'} className={styles.modal__button} onClick={onSaveHandle}>
+            Save
           </button>
         </form>
       </div>
@@ -98,9 +114,9 @@ const ProjectCreateModal = ({ state, setState }: Modal) => {
   );
 };
 
-export default ProjectCreateModal;
+export default ProjectSettingsModal;
 
 interface Modal {
-  state: boolean;
+  state: { visibility: boolean };
   setState: any;
 }

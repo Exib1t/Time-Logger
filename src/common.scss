@@ -31,3 +31,40 @@ body {
   background: var(--purple) !important;
   color: var(--white) !important;
 }
+
+.entering {
+  opacity: 0;
+}
+
+.entered {
+  animation: entering-anim .5s forwards;
+}
+
+.exiting {
+  animation: exiting-anim .5s forwards;
+}
+
+.exited {
+  //animation: exiting-anim .5s forwards;
+  opacity: 0;
+}
+
+@keyframes entering-anim {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes exiting-anim {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}

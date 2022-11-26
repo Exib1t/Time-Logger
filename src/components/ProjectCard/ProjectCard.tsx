@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './projectCard.module.css';
 import { Link } from 'react-router-dom';
 import { deleteProject, fetchProjects } from '../../storeApi/storeApi';
 import { useDispatch } from 'react-redux';
 import { hexToHSL } from '../../functions/hexToHsl';
+import ProjectSettingsModal from '../ProjectSettingsModal/ProjectSettingsModal';
+import Stopwatch from '../Stopwatch/Stopwatch';
+import { EDIT_PROJECT_ID } from '../../store/actionCreator';
 
-// @ts-ignore
-const ProjectCard = ({ project }) => {
+const ProjectCard = ({ project }: any) => {
   const dispatch = useDispatch();
+  const [modal, setModal] = useState(false);
 
   const style = {
     backgroundColor: hexToHSL(project.color),
@@ -18,6 +21,10 @@ const ProjectCard = ({ project }) => {
     dispatch(deleteProject(project.id));
     // @ts-ignore
     dispatch(fetchProjects());
+  }
+
+  function onSettingsHandle() {
+    dispatch({ type: EDIT_PROJECT_ID, payload: project.id.toString() });
   }
 
   return (
@@ -36,6 +43,7 @@ const ProjectCard = ({ project }) => {
       <Link to={`${project.id}`} className={styles.projectCard__btn}>
         Open
       </Link>
+      <button className={[styles.projectCard__settingsBtn, 'settings-button'].join(' ')} onClick={onSettingsHandle} />
       <button className={styles.projectCard__dltBtn} onClick={onDeleteHandle} />
     </div>
   );

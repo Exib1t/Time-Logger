@@ -1,5 +1,5 @@
 .projectsList__wrapper {
-  margin: 150px 0 0;
+  margin: 40px 0 0;
   padding: 0;
   width: 100%;
 }
@@ -14,49 +14,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
-}
-
-.projectsList__addBtn {
-  position: absolute;
-  right: 20px;
-  top: -100px;
-  min-width: 36px;
-  min-height: 36px;
-  font: normal 400 0px/1 'Ubuntu';
-  color: var(--white);
-  background: none;
-  outline: none;
-  border: 2px solid var(--purple);
-  border-radius: 50%;
-  cursor: pointer;
-  transition: .2s;
-}
-
-.projectsList__addBtn:hover {
-  font-size: 16px;
-  border-radius: 5px;
-  padding: 0 5px;
-}
-
-.projectsList__addBtn:hover::before, .projectsList__addBtn:hover::after {
-  opacity: 0;
-  transition: .2s;
-}
-
-.projectsList__addBtn::before, .projectsList__addBtn::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  background: var(--purple);
-  width: 16px;
-  height: 2px;
-  transition: .2s;
-}
-
-.projectsList__addBtn::before {
-  transform: translate(-50%, -50%) rotate(90deg);
 }
 
 .projectsList__text {

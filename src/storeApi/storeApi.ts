@@ -1,7 +1,6 @@
 import db from '../firebase.config';
 import { deleteDoc, doc } from 'firebase/firestore';
 import { FETCH_PROJECTS } from '../store/actionCreator';
-import { hexToHSL } from '../functions/hexToHsl';
 
 export const fetchProjects = () => {
   return async (dispatch: any) => {
