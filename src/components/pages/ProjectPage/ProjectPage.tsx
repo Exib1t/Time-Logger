@@ -19,7 +19,7 @@ const ProjectPage = () => {
   async function onAddHandle(e: any) {
     e.preventDefault();
     if (validateInput()) {
-      await project.tasks.unshift({ ...task, id: project.tasks.length + 1 });
+      await project.tasks.unshift({ ...task, id: project.tasks[0] ? project.tasks[0].id + 1 : 1 });
       // @ts-ignore
       await dispatch(postProject(project, projectId.toString()));
       // @ts-ignore
