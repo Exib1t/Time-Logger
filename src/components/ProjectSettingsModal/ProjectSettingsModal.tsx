@@ -15,6 +15,7 @@ const ProjectSettingsModal = ({ state, setState }: Modal) => {
     color: '',
     logged: '',
     remaining: '',
+    tasks: [],
   });
   const nameInput = useRef();
 

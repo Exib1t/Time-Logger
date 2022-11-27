@@ -14,6 +14,38 @@ const ProjectPage = () => {
   // @ts-ignore
   const dispatch = useDispatch();
   const project = projects.find((project: { id: number }) => +project.id === projectId);
+  const [task, setTask] = useState({ id: null, text: '' });
+
+  async function onAddHandle(e: any) {
+    e.preventDefault();
+    if (validateInput()) {
+      await project.tasks.unshift({ ...task, id: project.tasks.length + 1 });
+      // @ts-ignore
+      await dispatch(postProject(project, projectId.toString()));
+      // @ts-ignore
+      dispatch(fetchProjects());
+      clearText();
+    } else {
+      alert('Fill the input!');
+    }
+  }
+
+  async function onDeleteBtn(e: any) {
+    e.preventDefault();
+    project.tasks = await project.tasks.filter((tsk: { id: number }) => tsk.id !== +e.target.closest('li').dataset.id);
+    // @ts-ignore
+    await dispatch(postProject(project, projectId.toString()));
+    // @ts-ignore
+    dispatch(fetchProjects());
+  }
+
+  function validateInput() {
+    return task.text.trim();
+  }
+
+  function clearText() {
+    setTask({ ...task, text: '' });
+  }
 
   useEffect(() => {
     // @ts-ignore
@@ -34,6 +66,33 @@ const ProjectPage = () => {
       <div className={styles.projectPage}>
         <h1 className={styles.projectPage__title}>{project?.name}</h1>
         <Stopwatch projectId={projectId} />
+        <h2 className={styles.projectPage__subtitle}>Tasks</h2>
+        <ul className={styles.projectPage__list}>
+          <li className={styles.projectPage__itemAdd}>
+            <form className={styles.projectPage__form}>
+              <label className={styles.projectPage__label}>
+                <input
+                  className={styles.projectPage__input}
+                  type="text"
+                  placeholder={'Type short type description and press Enter'}
+                  value={task.text}
+                  onChange={e => {
+                    setTask({ ...task, text: e.target.value });
+                  }}
+                />
+                <button className={styles.projectPage__addBtn} type={'submit'} onClick={onAddHandle} />
+              </label>
+            </form>
+          </li>
+          {project?.tasks.map((task: { text: string; id: number }, index: number) => {
+            return (
+              <li className={styles.projectPage__item} key={index} data-id={task.id}>
+                <p>{task.text}</p>
+                <button className={styles.projectPage__dltBtn} type={'button'} onClick={onDeleteBtn} />
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </section>
   );

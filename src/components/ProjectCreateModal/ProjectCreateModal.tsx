@@ -14,6 +14,7 @@ const ProjectCreateModal = ({ state, setState }: Modal) => {
     color: '#000000',
     logged: { seconds: 0, minutes: 0, hours: 0 },
     remaining: { seconds: 0, minutes: 0, hours: 0 },
+    tasks: [],
   });
 
   function closeHandle() {
