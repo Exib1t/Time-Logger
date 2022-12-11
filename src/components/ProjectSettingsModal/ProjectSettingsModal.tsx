@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import styles from './projectSettingsModal.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProjects, postProject } from '../../storeApi/storeApi';
+import { toast } from 'react-toastify';
 
 const ProjectSettingsModal = ({ state, setState }: Modal) => {
   const dispatch = useDispatch();
@@ -42,6 +43,9 @@ const ProjectSettingsModal = ({ state, setState }: Modal) => {
       dispatch(postProject(editedProject, settings.id));
       // @ts-ignore
       dispatch(fetchProjects());
+      toast.success('Project successfully edited!', {
+        theme: 'colored',
+      });
       closeHandle();
     } else {
       // @ts-ignore

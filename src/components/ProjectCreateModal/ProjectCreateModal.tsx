@@ -3,6 +3,7 @@ import styles from './projectCreateModal.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProjects, postProject } from '../../storeApi/storeApi';
 import { getNewProjectId } from '../../functions/getNewProjectId';
+import { toast } from 'react-toastify';
 
 const ProjectCreateModal = ({ state, setState }: Modal) => {
   // @ts-ignore
@@ -28,6 +29,9 @@ const ProjectCreateModal = ({ state, setState }: Modal) => {
       dispatch(postProject(project, getNewProjectId(projectsState)));
       // @ts-ignore
       dispatch(fetchProjects());
+      toast.success('Project successfully created!', {
+        theme: 'colored',
+      });
       closeHandle();
       setProject({ ...project, name: '', color: '#000000' });
     }

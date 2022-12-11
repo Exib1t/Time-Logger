@@ -5,6 +5,7 @@ import styles from './projectsPage.module.css';
 import ProjectSettingsModal from '../../ProjectSettingsModal/ProjectSettingsModal';
 import { useDispatch } from 'react-redux';
 import { fetchProjects } from '../../../storeApi/storeApi';
+import { toast } from 'react-toastify';
 
 const ProjectsPage = () => {
   const dispatch = useDispatch();
@@ -18,6 +19,9 @@ const ProjectsPage = () => {
   function onRefreshClick() {
     // @ts-ignore
     dispatch(fetchProjects());
+    toast.info('Refreshed!', {
+      theme: 'colored',
+    });
   }
 
   function onSettingsHandle(e: any) {

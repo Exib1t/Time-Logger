@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchProjects, postProject } from '../../../storeApi/storeApi';
 import Stopwatch from '../../Stopwatch/Stopwatch';
 import styles from './projectPage.module.css';
+import { toast } from 'react-toastify';
 
 const ProjectPage = () => {
   const { pathname } = useLocation();
@@ -24,9 +25,14 @@ const ProjectPage = () => {
       await dispatch(postProject(project, projectId.toString()));
       // @ts-ignore
       dispatch(fetchProjects());
+      toast.success('Task successfully created!', {
+        theme: 'colored',
+      });
       clearText();
     } else {
-      alert('Fill the input!');
+      toast.error('Fill the input!', {
+        theme: 'colored',
+      });
     }
   }
 
@@ -37,6 +43,9 @@ const ProjectPage = () => {
     await dispatch(postProject(project, projectId.toString()));
     // @ts-ignore
     dispatch(fetchProjects());
+    toast.error('Task successfully deleted!', {
+      theme: 'colored',
+    });
   }
 
   function validateInput() {

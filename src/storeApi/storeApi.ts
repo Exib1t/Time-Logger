@@ -1,6 +1,7 @@
 import db from '../firebase.config';
 import { deleteDoc, doc } from 'firebase/firestore';
 import { FETCH_PROJECTS } from '../store/actionCreator';
+import { toast } from 'react-toastify';
 
 export const fetchProjects = () => {
   return async (dispatch: any) => {
@@ -25,6 +26,9 @@ export const postProject = (project: any, id: string) => {
 
 export const deleteProject = (id: string) => {
   return async (dispatch: any) => {
+    toast.error('Project Deleted!', {
+      theme: 'colored',
+    });
     await deleteDoc(doc(db, 'projects', id));
   };
 };
